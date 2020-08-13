@@ -1,0 +1,43 @@
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+}
+
+.board {
+   
+    background-color: rgb(216, 216, 216);
+    width: 50%;
+    
+    
+}
+
+.row {
+    display: flex;
+}
+
+.box {
+    border: 1px solid rgb(194, 194, 194);
+    flex: 1;
+    height: 100%;
+    
+}
+
+.box:after {
+    content: "";
+    float:left;
+    display: block;
+    padding-top: 100%;
+}
+
+button.play {
+    border: none;
+    color: white;
+    background-color: rgb(195, 114, 195);
+    width: 50%;
+    height: 5em;
+    margin: 2em;
+}
