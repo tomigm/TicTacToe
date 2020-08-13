@@ -1,11 +1,17 @@
+
+// &#9675; : Cricle
+// &#9711 : Large circle
+// &times : Cross
+
+
 const Gameboard = (() => {
     
     
     
     let gameboard = [
-       ["X", "X", "X"], // row
-       ["X", "X", "X"],
-       ["X", "X", "X"]
+       ["&#9675", "&times", "&times"], // row
+       ["&times", "&times", "&times"],
+       ["&times", "&times", "&times"]
     ];
     let board = document.getElementById("board");
 
@@ -17,7 +23,7 @@ const Gameboard = (() => {
         row.forEach(box => {
             let boxR = document.createElement("div");
             boxR.classList.add("box");
-            boxR.textContent = box;
+            boxR.innerHTML = box;
             rowR.appendChild(boxR);          
             
         })
