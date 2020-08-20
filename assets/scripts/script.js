@@ -59,7 +59,7 @@ const Gameboard = (() => {
         resetBoard();
         gameboard.forEach(createRow);
         const boxes = document.querySelectorAll('.box');
-        boxes.forEach(div => div.addEventListener('click', Gameflow.playerTurn))
+        boxes.forEach(div => div.addEventListener('click', gameflow.playerTurn))
 
 
 
@@ -94,7 +94,7 @@ const Player = (name, sign) => {
 }
 
 //CHOOSE TURN
-const Gameflow = (() => {
+const Gameflow = () => {
     
     const playerTurn = event => {
         
@@ -118,13 +118,14 @@ const Gameflow = (() => {
 
     return {playerTurn};
     
-})();
-
-Gameboard.render();
+};
 
 
+
+const gameflow = Gameflow();
 const playerOne = Player('one', '&times');
 const playerTwo = Player('two', '&#9675');
+Gameboard.render();
 
 
 
