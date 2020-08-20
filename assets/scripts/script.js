@@ -3,15 +3,23 @@
 // &#9711 : Large circle
 // &times : Cross
 
+/* DUMMY
+let gameboard = [
+       ["&#9675", "&times", "&times"], // row
+       ["&times", "&times", "&times"],
+       ["&times", "&times", "&times"]
+    ];
+*/
+
 //CREATES BOARD
 const Gameboard = (() => {
     
     
     
     let gameboard = [
-       ["&#9675", "&times", "&times"], // row
-       ["&times", "&times", "&times"],
-       ["&times", "&times", "&times"]
+       ["", "", ""], // row
+       ["", "", ""],
+       ["", "", ""]
     ];
     let board = document.getElementById("board");
 
@@ -33,31 +41,95 @@ const Gameboard = (() => {
         })
     }
 
+    let resetBoard = () => {
+        // check if booklist has childs
+         //if yes > while booklist have child, remove child
+       if(board.hasChildNodes()) {
+         
+         while (board.hasChildNodes()) {
+           board.removeChild(board.lastChild);
+         }
+         return
+       }
+       else {return}
+       
+       }
+
     let render = () => {
+        resetBoard();
         gameboard.forEach(createRow);
+        const boxes = document.querySelectorAll('.box');
+        boxes.forEach(div => div.addEventListener('click', Gameflow.playerTurn))
+
 
 
     }
     return {
-        
+        gameboard,
         render
     }
 
 })();
 
 // CREATES NEW PLAYER
-const Player = (name) => {
+const Player = (name, sign) => {
 
     const getName = () => name;
+    const getSign = () => sign
+    let moves = 0;
+    let getMoves = () => moves
+    const play = event => {
 
-    const play = function () {
+        if (event.target.innerHTML != "") {return}
+        moves += 1;
+        let boxIndex = event.target.getAttribute('data-index');
+        let rowIndex = event.target.parentNode.getAttribute('data-index');
+        console.log (boxIndex);
+        Gameboard.gameboard[rowIndex][boxIndex] = getSign();
+        Gameboard.render();
+        
 
     }
+    return {getMoves, play}
 }
 
-//CREATES NEW GAME
-const Game = () => {
+//CHOOSE TURN
+const Gameflow = (() => {
+    
+    const playerTurn = event => {
+        
+        
+        if (playerOne.getMoves() == playerTwo.getMoves()){
+            
+           playerOne.play(event);
+           
 
-}
+        }
+
+        else if (playerOne.getMoves() > playerTwo.getMoves()){
+
+            playerTwo.play(event);
+
+        }
+        else {return}
+        
+    };
+    
+
+    return {playerTurn};
+    
+})();
 
 Gameboard.render();
+
+
+const playerOne = Player('one', '&times');
+const playerTwo = Player('two', '&#9675');
+
+
+
+
+
+
+
+
