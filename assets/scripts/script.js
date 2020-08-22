@@ -14,21 +14,20 @@ let gameboard = [
 //CREATES BOARD
 const Gameboard = (() => {
     
-    
-    
-    let gameboard = [
+    let board = [             
        ["", "", ""], // row
        ["", "", ""],
-       ["", "", ""]
+       ["", "", ""],       
     ];
-    let board = document.getElementById("board");
+
+    let boardDOM = document.getElementById("board");
 
     let createRow = (row, index) => {
         let rowR = document.createElement("div");
         rowR.classList.add("row");
         
         rowR.dataset.index = index;
-        board.appendChild(rowR);
+        boardDOM.appendChild(rowR);
 
         row.forEach(function (box, index) {
             let boxR = document.createElement("div");
@@ -44,10 +43,10 @@ const Gameboard = (() => {
     let resetBoard = () => {
         // check if booklist has childs
          //if yes > while booklist have child, remove child
-       if(board.hasChildNodes()) {
+       if(boardDOM.hasChildNodes()) {
          
-         while (board.hasChildNodes()) {
-           board.removeChild(board.lastChild);
+         while (boardDOM.hasChildNodes()) {
+           boardDOM.removeChild(boardDOM.lastChild);
          }
          return
        }
@@ -57,7 +56,7 @@ const Gameboard = (() => {
 
     let render = () => {
         resetBoard();
-        gameboard.forEach(createRow);
+        board.forEach(createRow);
         const boxes = document.querySelectorAll('.box');
         boxes.forEach(div => div.addEventListener('click', gameflow.playerTurn))
 
@@ -65,7 +64,7 @@ const Gameboard = (() => {
 
     }
     return {
-        gameboard,
+        board,
         render
     }
 
@@ -85,8 +84,9 @@ const Player = (name, sign) => {
         let boxIndex = event.target.getAttribute('data-index');
         let rowIndex = event.target.parentNode.getAttribute('data-index');
         console.log (boxIndex);
-        Gameboard.gameboard[rowIndex][boxIndex] = getSign();
+        Gameboard.board[rowIndex][boxIndex] = getSign();
         Gameboard.render();
+        gameflow.gameCheck();
         
 
     }
@@ -95,40 +95,66 @@ const Player = (name, sign) => {
 
 //CHOOSE TURN
 const Gameflow = () => {
-    
-    const playerTurn = event => {
+    const gameCheck = function (){
         
+
+let winSign = 'tie';
+let arr = Gameboard.board
+ // Check for horizontal win 
+for (let i = 0; i < arr.length; i++) {
+        if (arr[i][0] !== "" && arr[i][0] == arr[i][1] && arr[i][1] == arr[i][2]){
+            if (winSign == 'tie'){
+            winSign = arr[i][0] ;
+            return console.log (winSign); //TODO HACER QUE SEGUN EL SIGNO, ME DEVUELVA EL PLAYER
+            }break;           
+	}
+}
+
+ // Check for vertical win 
+for (let i = 0; i < arr.length; i++){
+        if (arr[0][i] !== "" && arr[0][i] == arr[1][i] && arr[1][i] == arr[2][i] ){
+            if (winSign == 'tie'){
+            winSign = arr[0][i];
+            return console.log (winSign); //TODO
+            }break;                   
+	}
+}
+
+ // Check for diagonal win (upper left to bottom right) || Check for diagonal win (upper right to bottom left)
+ if ((arr[0][0] !== "" && arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]) || (arr[0][0] !== "" && arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0])){
+    if (winSign == 'tie'){
+        winSign = arr[1][1];
+        return console.log (winSign); //TODO
+    }
+    
+}
+      
+        console.log (winSign);
+    }
+
+    const playerTurn = event => {
         
         if (playerOne.getMoves() == playerTwo.getMoves()){
             
            playerOne.play(event);
            
-
         }
 
         else if (playerOne.getMoves() > playerTwo.getMoves()){
 
             playerTwo.play(event);
-
         }
         else {return}
-        
-    };
-    
 
-    return {playerTurn};
-    
+    }
+
+    return {playerTurn, gameCheck};   
 };
-
-
 
 const gameflow = Gameflow();
 const playerOne = Player('one', '&times');
 const playerTwo = Player('two', '&#9675');
 Gameboard.render();
-
-
-
 
 
 
