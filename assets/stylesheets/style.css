@@ -52,12 +52,23 @@ section {
 
 button.newGame {
     border: none;
+    border-radius: 5px;
     color: white;
     background-color: rgb(195, 114, 195);
     min-width: 500px;
-    height: 5em;
-    margin: 2em;
-}
+    height: 2em;
+    margin: 1em;
+    font-size: 2em;
+    font-weight: 200;
+    transition: 0.5s;
+  }
+
+  button.newGame:hover {
+      background-color: rgb(153, 89, 153);
+      color: white;
+      cursor: pointer;
+      
+  }
 
 /* MODAL */
 
