@@ -21,8 +21,14 @@ const Gameboard = (() => {
     ];
 
     const resetArray = function() {
-        board.forEach(row => row.forEach(box => box = ""))
-    }
+        
+        for (let row = 0; row < board.length; row++) {          
+            for (let box = 0; box < board[row].length; box++) {
+                board[row][box] = "";
+            }
+        }
+
+    }   
 
     let boardDOM = document.getElementById("board");
 
@@ -112,6 +118,7 @@ const Gameflow = () => {
     // &#9711 : Large circle
     // &times : Cross
     let winSign = "";
+    
     const restartGame = function () {
         winSign = "";
         playerOne.resetValues(0)
@@ -121,6 +128,7 @@ const Gameflow = () => {
 
     }
     const roundWinner = function () {
+        let totalPlays = playerOne.getMoves() + playerTwo.getMoves();
             if (winSign === '&times') {
                 console.log(`${playerOne.getName()} wins`);
                 playerOne.points += 1;
@@ -132,7 +140,7 @@ const Gameflow = () => {
                 playerTwo.points += 1;
                 return restartGame();
             }
-            else if (winSign == "" && playerOne.moves === 5) {
+            else if (totalPlays === 9) {
                 console.log ('TIE!');
                 return restartGame();
             }
@@ -148,7 +156,7 @@ const Gameflow = () => {
                 if (arr[i][0] !== "" && arr[i][0] == arr[i][1] && arr[i][1] == arr[i][2]){
                     if (winSign == ""){
                     winSign = arr[i][0] ;
-                    return roundWinner(); //TODO HACER QUE SEGUN EL SIGNO, ME DEVUELVA EL PLAYER
+                    return roundWinner(); 
                     }break;           
             }
         }
@@ -158,7 +166,7 @@ const Gameflow = () => {
                 if (arr[0][i] !== "" && arr[0][i] == arr[1][i] && arr[1][i] == arr[2][i] ){
                     if (winSign == ""){
                     winSign = arr[0][i];
-                    return roundWinner(); //TODO
+                    return roundWinner(); 
                     }break;                   
             }
         }
@@ -167,7 +175,7 @@ const Gameflow = () => {
         if ((arr[0][0] !== "" && arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]) || (arr[0][0] !== "" && arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0])){
             if (winSign == ""){
                 winSign = arr[1][1];
-                return roundWinner(); //TODO
+                return roundWinner(); 
             }
             
         }
