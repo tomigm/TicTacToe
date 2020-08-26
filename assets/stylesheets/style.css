@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+/* pallette
+
+#c372c3 purple
+#72c372 green
+#72c3c3 cyan
+#c37272 red
+
+*/
+* {
+    font-family: 'Nunito', sans-serif !important; 
+}
+
 section {
     display: flex;
     flex-direction: column;
@@ -36,7 +50,7 @@ section {
     padding-top: 100%;
 }
 
-button.play {
+button.newGame {
     border: none;
     color: white;
     background-color: rgb(195, 114, 195);
@@ -44,3 +58,118 @@ button.play {
     height: 5em;
     margin: 2em;
 }
+
+/* MODAL */
+
+.modal{
+    
+    background-color: rgba(72, 72, 72, 0.12);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.playersModal {
+    display: flex;
+    flex-direction: column;   
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    position: relative;    
+    height: 100%;
+    min-width: 500px;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.close {
+    position: absolute;
+    align-self: flex-end;
+    font-weight: 200;
+    font-size: 5rem;
+    color: #b9b9b9;
+    margin: 0.2em 0.2em 0 0;
+    top: 0;
+}
+
+.close:hover {
+    animation: fadein 0.5s;
+    color: #c37272;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.playersModal h1 {
+    align-self: center;
+    margin: 0em 0 1em;
+    font-size: 3rem;
+    font-weight: 200;
+    color: #333333;
+    
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+
+input[type=text]{
+    border-radius: 5px;
+    border: 1px solid rgb(189, 189, 189);
+    margin: 0.2em;
+    min-width: 500px;
+    min-height: 40px ;
+    font-size: 2em;
+    text-align: center;
+    font-weight: 200;
+    
+}
+
+
+
+
+button.play {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(195, 114, 195);
+    width: 500px;
+    height: 2em;
+    margin: 1em;
+    font-size: 2em;
+    font-weight: 200;
+    transition: 0.5s;
+  }
+
+  button.play:hover {
+      background-color: rgb(153, 89, 153);
+      color: white;
+      cursor: pointer;
+      
+  }
+
+
+
+
+
+
+
+
+
+
+
+ 
+  
+
+
+
+
+

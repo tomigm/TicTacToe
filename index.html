@@ -31,36 +31,21 @@
     -->
     </div>
 
-    <button class="play">PLAY</button>
+    <button class="newGame">NEW GAME</button>
 
     <div class="modal" id="modal">
-        <div class = "addBookModal" id = "bookModal">
+        <div class = "playersModal" id = "playersModal">
             <span class="close">&times;</span>
-            <h1>Add book</h1> 
-            <form>
-            
-                
-                <div class="inputs">
-                    <label for="playerOne">Readed</label>
-                    <input type="text" id="playerOne" name="P1Input" placeholder="Enter name...">     
-                    <label for="playerTwo">Readed</label>           
-                    <input type="text" id="playerTwo" name="P2Input" placeholder="Enter name...">
-                </div>
-
-                <div class="radio-group">
-                    <input type="radio" id="readedInput" name="readSelector" value="yes" checked>
-                    <label for="readedInput">Readed</label>
-                    <input type="radio" id="unreadedInput" name="readSelector" value="no">     
-                    <label for="unreadedInput">Unreaded</label>
-                    
-                </div>
-            
+            <h1>ENTER NAMES</h1> 
+            <form> 
+                <input type="text" id="playerOne" name="P1Input" placeholder="&times">                             
+                <input type="text" id="playerTwo" name="P2Input" placeholder="&#9675">
             </form>
-            <button class="add" onclick = "addBookToLibrary ()">Add</button>
+            <button class="play" onclick = "addBookToLibrary ()">PLAY</button>
         </div>
     </div>
 </section>
 
 </body>
-<script src="assets/scripts/script.js"></script
+<script src="assets/scripts/script.js"></script>
 </html>
