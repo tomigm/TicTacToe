@@ -20,6 +20,10 @@ const Gameboard = (() => {
        ["", "", ""],       
     ];
 
+    const resetArray = function() {
+        board.forEach(row => row.forEach(box => box = ""))
+    }
+
     let boardDOM = document.getElementById("board");
 
     let createRow = (row, index) => {
@@ -63,9 +67,12 @@ const Gameboard = (() => {
 
 
     }
+
+    
     return {
         board,
-        render
+        render,
+        resetArray,
     }
 
 })();
@@ -74,9 +81,10 @@ const Gameboard = (() => {
 const Player = (name, sign) => {
 
     const getName = () => name;
-    const getSign = () => sign
+    const getSign = () => sign;
+    const points = 0;
     let moves = 0;
-    let getMoves = () => moves
+    let getMoves = () => moves;
     const play = event => {
 
         if (event.target.innerHTML != "") {return}
@@ -90,54 +98,89 @@ const Player = (name, sign) => {
         
 
     }
-    return {getMoves, play}
+
+    const resetValues = function(reset) {
+        moves = reset;
+        
+    }
+    return {getMoves, getName, play, points, resetValues}
 }
 
 //CHOOSE TURN
 const Gameflow = () => {
-    const gameCheck = function (){
-        
+    // &#9675; : Cricle
+    // &#9711 : Large circle
+    // &times : Cross
+    let winSign = "";
+    const restartGame = function () {
+        winSign = "";
+        playerOne.resetValues(0)
+        playerTwo.resetValues(0)
+        Gameboard.resetArray();
+        return Gameboard.render();     
 
-let winSign = 'tie';
-let arr = Gameboard.board
- // Check for horizontal win 
-for (let i = 0; i < arr.length; i++) {
-        if (arr[i][0] !== "" && arr[i][0] == arr[i][1] && arr[i][1] == arr[i][2]){
-            if (winSign == 'tie'){
-            winSign = arr[i][0] ;
-            return console.log (winSign); //TODO HACER QUE SEGUN EL SIGNO, ME DEVUELVA EL PLAYER
-            }break;           
-	}
-}
-
- // Check for vertical win 
-for (let i = 0; i < arr.length; i++){
-        if (arr[0][i] !== "" && arr[0][i] == arr[1][i] && arr[1][i] == arr[2][i] ){
-            if (winSign == 'tie'){
-            winSign = arr[0][i];
-            return console.log (winSign); //TODO
-            }break;                   
-	}
-}
-
- // Check for diagonal win (upper left to bottom right) || Check for diagonal win (upper right to bottom left)
- if ((arr[0][0] !== "" && arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]) || (arr[0][0] !== "" && arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0])){
-    if (winSign == 'tie'){
-        winSign = arr[1][1];
-        return console.log (winSign); //TODO
     }
-    
-}
-      
-        console.log (winSign);
+    const roundWinner = function () {
+            if (winSign === '&times') {
+                console.log(`${playerOne.getName()} wins`);
+                playerOne.points += 1;
+                return restartGame();
+                
+            }
+            else if (winSign === '&#9675') {
+                console.log(`${playerTwo.getName()} wins`);
+                playerTwo.points += 1;
+                return restartGame();
+            }
+            else if (winSign == "" && playerOne.moves === 5) {
+                console.log ('TIE!');
+                return restartGame();
+            }
+            else {console.log('playing...')}
+        }
+    const gameCheck = function (){
+            
+
+
+        let arr = Gameboard.board
+        // Check for horizontal win 
+        for (let i = 0; i < arr.length; i++) {
+                if (arr[i][0] !== "" && arr[i][0] == arr[i][1] && arr[i][1] == arr[i][2]){
+                    if (winSign == ""){
+                    winSign = arr[i][0] ;
+                    return roundWinner(); //TODO HACER QUE SEGUN EL SIGNO, ME DEVUELVA EL PLAYER
+                    }break;           
+            }
+        }
+
+        // Check for vertical win 
+        for (let i = 0; i < arr.length; i++){
+                if (arr[0][i] !== "" && arr[0][i] == arr[1][i] && arr[1][i] == arr[2][i] ){
+                    if (winSign == ""){
+                    winSign = arr[0][i];
+                    return roundWinner(); //TODO
+                    }break;                   
+            }
+        }
+
+        // Check for diagonal win (upper left to bottom right) || Check for diagonal win (upper right to bottom left)
+        if ((arr[0][0] !== "" && arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]) || (arr[0][0] !== "" && arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0])){
+            if (winSign == ""){
+                winSign = arr[1][1];
+                return roundWinner(); //TODO
+            }
+            
+        }
+            
+        return roundWinner();
     }
 
     const playerTurn = event => {
         
         if (playerOne.getMoves() == playerTwo.getMoves()){
             
-           playerOne.play(event);
-           
+            playerOne.play(event);
+            
         }
 
         else if (playerOne.getMoves() > playerTwo.getMoves()){
@@ -148,15 +191,26 @@ for (let i = 0; i < arr.length; i++){
 
     }
 
-    return {playerTurn, gameCheck};   
+        return {playerTurn, gameCheck};   
 };
 
 const gameflow = Gameflow();
-const playerOne = Player('one', '&times');
-const playerTwo = Player('two', '&#9675');
+const playerOne = Player('tomi', '&times');
+const playerTwo = Object.create(Player('two', '&#9675')) // TODO VER EL POST DE MEDIUM DE OBJECT.CREATE Y OBJECT.ASSIGN
 Gameboard.render();
 
 
+/*
 
+TODO
+
+*
+*Clean up the interface to allow players to put in their names, include a button to start/restart the game and add a display element that congratulates the winning player!
+* LINKEAR GAMECHECK CON CADA PLAYER ==> HACER VARIABLE WIN() EN PLAYER QUE TIRE MODAL Y RESETEE EL TABLERO
+* Build the logic that checks for when the game is over! Should check for 3-in-a-row and a tie => CUANDO TODO EL TABLERO ESTA OCUPADO Y WINSIGN = TIE == EMPATE
+
+
+
+*/
 
 
