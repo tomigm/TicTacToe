@@ -32,6 +32,33 @@
     </div>
 
     <button class="play">PLAY</button>
+
+    <div class="modal" id="modal">
+        <div class = "addBookModal" id = "bookModal">
+            <span class="close">&times;</span>
+            <h1>Add book</h1> 
+            <form>
+            
+                
+                <div class="inputs">
+                    <label for="playerOne">Readed</label>
+                    <input type="text" id="playerOne" name="P1Input" placeholder="Enter name...">     
+                    <label for="playerTwo">Readed</label>           
+                    <input type="text" id="playerTwo" name="P2Input" placeholder="Enter name...">
+                </div>
+
+                <div class="radio-group">
+                    <input type="radio" id="readedInput" name="readSelector" value="yes" checked>
+                    <label for="readedInput">Readed</label>
+                    <input type="radio" id="unreadedInput" name="readSelector" value="no">     
+                    <label for="unreadedInput">Unreaded</label>
+                    
+                </div>
+            
+            </form>
+            <button class="add" onclick = "addBookToLibrary ()">Add</button>
+        </div>
+    </div>
 </section>
 
 </body>

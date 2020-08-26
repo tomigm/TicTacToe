@@ -130,18 +130,18 @@ const Gameflow = () => {
     const roundWinner = function () {
         let totalPlays = playerOne.getMoves() + playerTwo.getMoves();
             if (winSign === '&times') {
-                console.log(`${playerOne.getName()} wins`);
+                console.log(`${playerOne.getName()} wins`); // TODO DOM
                 playerOne.points += 1;
                 return restartGame();
                 
             }
             else if (winSign === '&#9675') {
-                console.log(`${playerTwo.getName()} wins`);
+                console.log(`${playerTwo.getName()} wins`); // TODO DOM
                 playerTwo.points += 1;
                 return restartGame();
             }
             else if (totalPlays === 9) {
-                console.log ('TIE!');
+                console.log ('TIE!'); // TODO DOM
                 return restartGame();
             }
             else {console.log('playing...')}
@@ -215,7 +215,7 @@ TODO
 *
 *Clean up the interface to allow players to put in their names, include a button to start/restart the game and add a display element that congratulates the winning player!
 * LINKEAR GAMECHECK CON CADA PLAYER ==> HACER VARIABLE WIN() EN PLAYER QUE TIRE MODAL Y RESETEE EL TABLERO
-* Build the logic that checks for when the game is over! Should check for 3-in-a-row and a tie => CUANDO TODO EL TABLERO ESTA OCUPADO Y WINSIGN = TIE == EMPATE
+
 
 
 
