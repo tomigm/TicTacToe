@@ -118,6 +118,10 @@ const Gameflow = () => {
     // &#9711 : Large circle
     // &times : Cross
     let winSign = "";
+
+    const newGame = function() {
+
+    }
     
     const restartGame = function () {
         winSign = "";
@@ -206,6 +210,26 @@ const gameflow = Gameflow();
 const playerOne = Player('tomi', '&times');
 const playerTwo = Object.create(Player('two', '&#9675')) // TODO VER EL POST DE MEDIUM DE OBJECT.CREATE Y OBJECT.ASSIGN
 Gameboard.render();
+
+// Get the modal
+const modal = document.getElementById("modal");
+
+// Get the button that opens the modal
+const openModal = document.getElementById("newGame");
+
+// Get the <span> element that closes the modal
+const closeModal = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+openModal.onclick = function() {
+  modal.style.display = "block";
+
+}
+
+// When the user clicks on <span> (x), close the modal
+closeModal.onclick = function() {
+  modal.style.display = "none";
+}
 
 
 /*
