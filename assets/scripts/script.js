@@ -120,6 +120,13 @@ const Gameflow = () => {
     let winSign = "";
 
     const newGame = function() {
+        playerOne = Player(`${HtmlFunctionality.P1name.value}`, '&times');
+        playerTwo = Player(`${HtmlFunctionality.P2name.value}`, '&#9675');
+        restartGame();
+        HtmlFunctionality.p1Points.textContent = '0';
+        HtmlFunctionality.p2Points.textContent = '0';
+        HtmlFunctionality.displayName.textContent = ':)'
+        Gameboard.render();
 
     }
     
@@ -206,8 +213,11 @@ const Gameflow = () => {
 
     }
 
-        return {playerTurn, gameCheck};   
+        return {playerTurn, gameCheck, newGame};   
 };
+
+let playerOne, playerTwo;
+const gameflow = Gameflow();
 
 const HtmlFunctionality = (() => {
     const display = document.getElementById("display");
@@ -215,10 +225,13 @@ const HtmlFunctionality = (() => {
     let p1Points = document.getElementById('p1Points');
     let p2Points = document.getElementById('p2Points'); 
 
-    let P1name = document.getElementById('playerOne').value
-    let P2name = document.getElementById('playerTwo').value
+    let P1name = document.getElementById('playerOne')
+    let P2name = document.getElementById('playerTwo')
 
+    const play = document.getElementById('playBtn');
+play.addEventListener('click', gameflow.newGame)
     
+
 
     // Get the modal
     const modal = document.getElementById("modal");    
@@ -235,29 +248,15 @@ const HtmlFunctionality = (() => {
       modal.style.display = "none";
     }
 
-    return {display, displayName, p1Points, p2Points}
+    play.onclick = function () {
+        modal.style.display = "none"
+    }
+
+    return {display, displayName, p1Points, p2Points, P1name, P2name}
 
 })()
 
-const gameflow = Gameflow();
-const playerOne = Player('tomi', '&times');
-const playerTwo = Object.create(Player('two', '&#9675')) // TODO VER EL POST DE MEDIUM DE OBJECT.CREATE Y OBJECT.ASSIGN
-Gameboard.render();
 HtmlFunctionality;
 
-
-
-/*
-
-TODO
-
-*
-*Clean up the interface to allow players to put in their names, include a button to start/restart the game and add a display element that congratulates the winning player!
-* LINKEAR GAMECHECK CON CADA PLAYER ==> HACER VARIABLE WIN() EN PLAYER QUE TIRE MODAL Y RESETEE EL TABLERO
-
-
-
-
-*/
 
 
