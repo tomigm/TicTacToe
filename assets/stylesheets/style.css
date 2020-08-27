@@ -21,12 +21,37 @@ section {
     
 }
 
-.board {
-   
-    background-color: rgb(216, 216, 216);
+#display {
+    height: 100px;
+    
     min-width: 500px;
     
-    
+    font-size: 2em;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+}
+
+#display h1{
+    color: #333333;
+}
+
+#display .cross{
+    color: #72c3c3 ;
+    font-size: 1.5em;
+}
+
+
+#display .circle{
+    color: #c37272 ;
+    font-size: 1.5em;
+}
+
+.board {
+    background-color: rgb(216, 216, 216);
+    min-width: 500px;
 }
 
 .row {
@@ -73,7 +98,7 @@ button.newGame {
 /* MODAL */
 
 .modal{
-    
+    display: none;
     background-color: rgba(72, 72, 72, 0.12);
     width: 100%;
     height: 100%;
