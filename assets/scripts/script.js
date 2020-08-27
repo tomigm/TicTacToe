@@ -134,18 +134,21 @@ const Gameflow = () => {
     const roundWinner = function () {
         let totalPlays = playerOne.getMoves() + playerTwo.getMoves();
             if (winSign === '&times') {
-                console.log(`${playerOne.getName()} wins`); // TODO DOM
+               
                 playerOne.points += 1;
+                HtmlFunctionality.displayName.textContent = `${playerOne.getName()} wins` // TODO DOM
+                HtmlFunctionality.p1Points.textContent = playerOne.points;
                 return restartGame();
                 
             }
             else if (winSign === '&#9675') {
-                console.log(`${playerTwo.getName()} wins`); // TODO DOM
                 playerTwo.points += 1;
+                HtmlFunctionality.displayName.textContent = `${playerTwo.getName()} wins`;
+                HtmlFunctionality.p2Points.textContent = playerTwo.points; // TODO DOM                
                 return restartGame();
             }
             else if (totalPlays === 9) {
-                console.log ('TIE!'); // TODO DOM
+                HtmlFunctionality.displayName.textContent = 'TIE!'; // TODO DOM
                 return restartGame();
             }
             else {console.log('playing...')}
@@ -206,30 +209,42 @@ const Gameflow = () => {
         return {playerTurn, gameCheck};   
 };
 
+const HtmlFunctionality = (() => {
+    const display = document.getElementById("display");
+    let displayName = document.getElementById('displayName'); 
+    let p1Points = document.getElementById('p1Points');
+    let p2Points = document.getElementById('p2Points'); 
+
+    let P1name = document.getElementById('playerOne').value
+    let P2name = document.getElementById('playerTwo').value
+
+    
+
+    // Get the modal
+    const modal = document.getElementById("modal");    
+    // Get the button that opens the modal
+    const openModal = document.getElementById("newGame");    
+    // Get the <span> element that closes the modal
+    const closeModal = document.getElementsByClassName("close")[0];    
+    // When the user clicks the button, open the modal 
+    openModal.onclick = function() {
+      modal.style.display = "block";    
+    }    
+    // When the user clicks on <span> (x), close the modal
+    closeModal.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    return {display, displayName, p1Points, p2Points}
+
+})()
+
 const gameflow = Gameflow();
 const playerOne = Player('tomi', '&times');
 const playerTwo = Object.create(Player('two', '&#9675')) // TODO VER EL POST DE MEDIUM DE OBJECT.CREATE Y OBJECT.ASSIGN
 Gameboard.render();
+HtmlFunctionality;
 
-// Get the modal
-const modal = document.getElementById("modal");
-
-// Get the button that opens the modal
-const openModal = document.getElementById("newGame");
-
-// Get the <span> element that closes the modal
-const closeModal = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-openModal.onclick = function() {
-  modal.style.display = "block";
-
-}
-
-// When the user clicks on <span> (x), close the modal
-closeModal.onclick = function() {
-  modal.style.display = "none";
-}
 
 
 /*
