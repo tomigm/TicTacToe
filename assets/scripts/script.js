@@ -150,13 +150,20 @@ const Gameflow = () => {
                     }break;                   
             }
         }
-        // Check for diagonal win (upper left to bottom right) || Check for diagonal win (upper right to bottom left)
-        if ((arr[0][0] !== "" && arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]) || (arr[0][0] !== "" && arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0])){
+        // Check for diagonal win (upper left to bottom right) 
+        if (arr[0][0] !== "" && arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]){
             if (winSign == ""){
                 winSign = arr[1][1];
                 return roundWinner(); 
             }            
-        }            
+        }
+       // Check for diagonal win (upper right to bottom left) 
+        else if (arr[0][2] !== "" && arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0]){
+            if (winSign == ""){
+                winSign = arr[1][1];
+                return roundWinner(); 
+            }            
+        }
         return roundWinner();
     }
 
